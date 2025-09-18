@@ -25,7 +25,7 @@ variable "env" {
 variable "vpc_cidr_block" {
   description = "The CIDR block for the VPC."
   type        = string
-  default     = "10.0.0.0/16"
+  default     = "10.10.0.0/16"
 }
 
 variable "vpc_name" {
@@ -34,26 +34,50 @@ variable "vpc_name" {
   default     = "mic-prod-vpc"
 }
 
-variable "public_subnet_cidr_block" {
+variable "public_subnet1_cidr_block" {
   description = "CIDR block for the public subnet."
   type        = string
-  default     = "10.0.1.0/24"
+  default     = "10.10.0.0/20"
 }
 
-variable "private_subnet_cidr_block" {
-  description = "CIDR block for the private subnet."
+variable "public_subnet2_cidr_block" {
+  description = "CIDR block for the second public subnet"
   type        = string
-  default     = "10.0.2.0/24"
+  default     = "10.10.16.0/20"
 }
 
-variable "public_subnet_az" {
+variable "private_subnet1_cidr_block" {
+  description = "CIDR block for the first private subnet"
+  type        = string
+  default     = "10.10.128.0/20"
+}
+
+variable "private_subnet2_cidr_block" {
+  description = "CIDR block for the second private subnet"
+  type        = string
+  default     = "10.10.144.0/20"
+}
+
+variable "public_subnet1_az" {
   description = "Availability Zone for the public subnet."
   type        = string
   default     = "us-east-2a"
 }
 
-variable "private_subnet_az" {
-  description = "Availability Zone for the private subnet."
+variable "public_subnet2_az" {
+  description = "Availability Zone for the second public subnet"
+  type        = string
+  default     = "us-east-2b"
+}
+
+variable "private_subnet1_az" {
+  description = "Availability Zone for the first private subnet"
+  type        = string
+  default     = "us-east-2a"
+}
+
+variable "private_subnet2_az" {
+  description = "Availability Zone for the second private subnet"
   type        = string
   default     = "us-east-2b"
 }

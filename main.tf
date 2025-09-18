@@ -6,8 +6,16 @@ module "vpc" {
     region                       = var.region
     vpc_name                     = var.vpc_name
     vpc_cidr_block               = var.vpc_cidr_block
-    public_subnet_cidr_block     = var.public_subnet_cidr_block
-    private_subnet_cidr_block    = var.private_subnet_cidr_block
-    public_subnet_az             = var.public_subnet_az
-    private_subnet_az            = var.private_subnet_az
+
+    public_subnet1_cidr_block    = var.public_subnet1_cidr_block
+    public_subnet1_az            = var.public_subnet1_az
+
+    public_subnet2_cidr_block    = var.public_subnet2_cidr_block
+    public_subnet2_az            = var.public_subnet2_az
+
+    private_subnet1_cidr_block   = var.private_subnet1_cidr_block
+    private_subnet1_az           = var.private_subnet1_az
+
+    private_subnet2_cidr_block   = var.private_subnet2_cidr_block
+    private_subnet2_az           = var.private_subnet2_az
 }

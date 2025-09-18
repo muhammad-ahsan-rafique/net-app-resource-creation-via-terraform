@@ -19,13 +19,23 @@ variable "vpc_name" {
 }
 
 
-variable "public_subnet_cidr_block" {
-    description = "this is the public subnet cidr block"
+variable "public_subnet1_cidr_block" {
+    description = "CIDR block for the first public subnet"
     type        = string
 }
 
-variable "private_subnet_cidr_block" {
-    description = "this is the public subnet cidr block"
+variable "public_subnet2_cidr_block" {
+    description = "CIDR block for the second public subnet"
+    type        = string
+}
+
+variable "private_subnet1_cidr_block" {
+    description = "CIDR block for the first private subnet"
+    type        = string
+}
+
+variable "private_subnet2_cidr_block" {
+    description = "CIDR block for the second private subnet"
     type        = string
 }
 
@@ -34,13 +44,23 @@ variable "region" {
     type        = string
 }
 
-variable "public_subnet_az" {
-    description = "availability zones"
+variable "public_subnet1_az" {
+    description = "availability zone for first public subnet"
     type        = string
 }
 
-variable "private_subnet_az" {
-    description = "availability zones"
+variable "public_subnet2_az" {
+    description = "availability zone for second public subnet"
+    type        = string
+}
+
+variable "private_subnet1_az" {
+    description = "availability zone for first private subnet"
+    type        = string
+}
+
+variable "private_subnet2_az" {
+    description = "availability zone for second private subnet"
     type        = string
 }
 
