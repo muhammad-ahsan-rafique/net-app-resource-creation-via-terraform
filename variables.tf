@@ -1,7 +1,13 @@
 variable "region" {
   description = "AWS region for the project."
   type        = string
-  default     = "us-east-1"
+  default     = "us-east-2"
+}
+
+variable "profile" {
+  description = "set the name of the profile when we have multiple accounts configured"
+  type        = string
+  default     = "mic"
 }
 
 variable "project_name" {
@@ -43,11 +49,11 @@ variable "private_subnet_cidr_block" {
 variable "public_subnet_az" {
   description = "Availability Zone for the public subnet."
   type        = string
-  default     = "us-east-1a"
+  default     = "us-east-2a"
 }
 
 variable "private_subnet_az" {
   description = "Availability Zone for the private subnet."
   type        = string
-  default     = "us-east-1b"
+  default     = "us-east-2b"
 }
