@@ -68,6 +68,8 @@ resource "aws_route" "public_internet_gateway" {
   gateway_id             = aws_internet_gateway.main.id
 }
 
+
+
 resource "aws_route_table_association" "public1" {
   subnet_id      = aws_subnet.public1.id
   route_table_id = aws_route_table.public.id
@@ -153,7 +155,7 @@ resource "aws_network_acl" "public" {
 
 resource "aws_eip" "nat" {
   count = var.enable_nat_gateway ? (var.single_nat_gateway ? 1 : 2) : 0
-  vpc   = aws_vpc.main.id
+  domain = "vpc"
   tags  = merge(
     var.nat_eip_tags,
     {
@@ -171,4 +173,18 @@ resource "aws_nat_gateway" "main" {
   tags = {
     Name = "${var.project_name}-${var.env}-nat-gateway-${count.index + 1}"
   }
+}
+
+
+# aws route public gateway:
+
+resource "aws_route" "private_nat_gateway" {
+  count = var.enable_nat_gateway ? (var.single_nat_gateway ? 1 : 2) : 0
+
+  route_table_id = element(
+    [aws_route_table.private1.id, aws_route_table.private2.id],
+    count.index
+  )
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = aws_nat_gateway.main[count.index].id
 }
