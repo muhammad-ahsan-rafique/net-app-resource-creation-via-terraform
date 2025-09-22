@@ -18,4 +18,9 @@ module "vpc" {
 
     private_subnet2_cidr_block   = var.private_subnet2_cidr_block
     private_subnet2_az           = var.private_subnet2_az
+
+    enable_nat_gateway     = var.enable_nat_gateway
+    single_nat_gateway     = var.single_nat_gateway
+    nat_eip_tags          = var.nat_eip_tags
+    nat_gateway_tags      = var.nat_gateway_tags
 }

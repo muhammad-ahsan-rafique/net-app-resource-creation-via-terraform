@@ -7,7 +7,7 @@ variable "region" {
 variable "profile" {
   description = "set the name of the profile when we have multiple accounts configured"
   type        = string
-  default     = "mic"
+  default     = "ic"
 }
 
 variable "project_name" {
@@ -80,4 +80,28 @@ variable "private_subnet2_az" {
   description = "Availability Zone for the second private subnet"
   type        = string
   default     = "us-east-2b"
+}
+
+variable "enable_nat_gateway" {
+  description = "Enable NAT Gateway for private subnets"
+  type        = bool
+  default     = true
+}
+
+variable "single_nat_gateway" {
+  description = "Use single NAT Gateway for all private subnets"
+  type        = bool
+  default     = false
+}
+
+variable "nat_eip_tags" {
+  description = "Additional tags for NAT Gateway EIPs"
+  type        = map(string)
+  default     = {}
+}
+
+variable "nat_gateway_tags" {
+  description = "Additional tags for NAT Gateways"
+  type        = map(string)
+  default     = {}
 }

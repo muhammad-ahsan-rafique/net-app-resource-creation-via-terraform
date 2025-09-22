@@ -147,3 +147,28 @@ resource "aws_network_acl" "public" {
     Name = "${var.project_name}-${var.env}-public-nacl"
   }
 }
+
+
+# Elastic Ip Resource
+
+resource "aws_eip" "nat" {
+  count = var.enable_nat_gateway ? (var.single_nat_gateway ? 1 : 2) : 0
+  vpc   = aws_vpc.main.id
+  tags  = merge(
+    var.nat_eip_tags,
+    {
+      Name = "${var.project_name}-${var.env}-nat-eip-${count.index + 1}"
+    }
+  )
+}
+
+
+resource "aws_nat_gateway" "main" {
+  count = var.enable_nat_gateway ? (var.single_nat_gateway ? 1 : 2) : 0
+
+  allocation_id = aws_eip.nat[count.index].id
+  subnet_id     = var.single_nat_gateway ? aws_subnet.public1.id : element([aws_subnet.public1.id, aws_subnet.public2.id], count.index)
+  tags = {
+    Name = "${var.project_name}-${var.env}-nat-gateway-${count.index + 1}"
+  }
+}

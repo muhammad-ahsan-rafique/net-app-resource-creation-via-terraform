@@ -64,4 +64,24 @@ variable "private_subnet2_az" {
     type        = string
 }
 
+variable "enable_nat_gateway" {
+  description = "Enable NAT Gateway for private subnets"
+  type        = bool
+}
+
+variable "single_nat_gateway" {
+  description = "Use single NAT Gateway for all private subnets"
+  type        = bool
+}
+
+variable "nat_eip_tags" {
+  description = "Additional tags for NAT Gateway EIPs"
+  type        = map(string)
+}
+
+variable "nat_gateway_tags" {
+  description = "Additional tags for NAT Gateways"
+  type        = map(string)
+}
+
 
