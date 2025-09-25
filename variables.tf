@@ -7,7 +7,7 @@ variable "region" {
 variable "profile" {
   description = "set the name of the profile when we have multiple accounts configured"
   type        = string
-  default     = "ic"
+  default     = "mic"
 }
 
 variable "project_name" {
@@ -105,3 +105,76 @@ variable "nat_gateway_tags" {
   type        = map(string)
   default     = {}
 }
+
+# EC2 Varaibles setup
+
+
+variable "ami_id" {
+  description = "The AMI ID to use for the EC2 instance."
+  type        = string
+  default     = "ami-0b1dcb5abc47cd8b5" 
+}
+
+variable "instance_type" {
+  description = "The instance type to use for the EC2 instance."
+  type        = string
+  default     = "t2.micro" 
+}
+
+variable "key_name" {
+  description = "The key pair name to use for the instances."
+  type        = string
+  default     = "mic-linux-test-kp"
+}
+
+variable "tags" {
+  description = "A map of tags to assign to the resources."
+  type        = map(string)
+  default = {
+    Project = "mic-project"
+    Env     = "prod"
+    Owner   = "Moavia Hassan"
+  }
+}
+
+
+
+variable "ec2_linux_name" {
+  type        = string
+  description = "Create a single NAT gateway."
+  default     = "mic-prod-linux"
+}
+
+
+# for Security groups:
+
+variable "vpc_id" {
+  description = "The ID of the VPC to create the security group in."
+  type        = string
+}
+
+variable "ssh_port" {
+  description = "The port to allow SSH traffic on."
+  type        = number
+  default     = 22
+}
+
+variable "http_port" {
+  description = "The port to allow HTTP traffic on."
+  type        = number
+  default     = 80
+}
+
+variable "source_cidr_block" {
+  description = "The CIDR block to allow inbound traffic from."
+  type        = string
+  default     = "0.0.0.0/0"
+}
+
+variable "sg_name" {
+  description = "sg_name"
+  type        = string
+  default     = "mic-linux-test-sg"
+}
+
+
