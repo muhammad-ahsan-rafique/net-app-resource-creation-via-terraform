@@ -1,5 +1,5 @@
 resource "aws_security_group" "main" {
-  name        = "${var.tags["Name"]}-sg"
+  name        = var.sg_name
   description = "Security group for the web server"
   vpc_id      = var.vpc_id
 

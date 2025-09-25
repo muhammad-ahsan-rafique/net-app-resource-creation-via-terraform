@@ -174,7 +174,7 @@ variable "source_cidr_block" {
 variable "sg_name" {
   description = "sg_name"
   type        = string
-  default     = "mic-linux-test-sg"
+  default     = "mic-prod-sg"
 }
 
 

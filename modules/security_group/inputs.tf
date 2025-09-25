@@ -3,6 +3,11 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "sg_name" {
+  description = "security group name"
+  type        = string
+}
+
 variable "ssh_port" {
   description = "The port to allow SSH traffic on."
   type        = number

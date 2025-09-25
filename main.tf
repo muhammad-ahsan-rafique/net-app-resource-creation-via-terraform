@@ -26,30 +26,47 @@ module "vpc" {
 }
 
 
+
+
 module "ec2" {
   source = "./modules/ec2"
 
-  ami_id           = var.ami_id
-  instance_type    = var.instance_type
-  key_name         = var.key_name
-  subnets          = [
-    module.vpc.public_subnet1_id,
-    module.vpc.public_subnet2_id,
- 
-  ]
-  security_group_ids = []
+  ami_id             = var.ami_id
+  instance_type      = var.instance_type
+  key_name           = var.key_name
+  subnets            = [module.vpc.private_subnet1_id, module.vpc.private_subnet2_id]
+  security_group_ids = [module.security_group.security_group_id]
   tags = {
-    Name = var.ec2_linux_name
+    Name = "app-server"
+    Type = "private"
   }
 }
 
 
 
+
 module "security_group" {
   source = "./modules/security_group"
-  
-  vpc_id = module.vpc.vpc_id
+
+  vpc_id          = module.vpc.vpc_id
+  ssh_port        = 22
+  http_port       = 80
+  source_cidr_block = "0.0.0.0/0"
   tags = {
-    Name = var.sg_name
+    Name = "${var.project_name}-${var.env}-sg"
   }
+}
+
+
+
+module "load_balancer" {
+  source = "./modules/load_balancer"
+
+  project_name      = var.project_name
+  env               = var.env
+  vpc_id            = module.vpc.vpc_id
+  public_subnet_ids = [module.vpc.public_subnet1_id, module.vpc.public_subnet2_id]
+  security_group_ids = [module.security_group.security_group_id]
+  listener_port      = 80
+  target_group_port  = 80
 }
